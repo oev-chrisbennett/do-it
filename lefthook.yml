@@ -1,0 +1,5 @@
+pre-commit:
+  parallel: true
+  commands:
+    Biome Check 🔷:
+      run: bun check --staged
