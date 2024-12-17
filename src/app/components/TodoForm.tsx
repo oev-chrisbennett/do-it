@@ -28,13 +28,13 @@ export const TodoForm = ({ onAdd }: TodoFormProps) => {
                 placeholder="Add a new todo..."
                 className="flex-1 p-3 border rounded-lg"
             />
-            <div className="flex gap-2">
+            <div className="flex gap-2 sm:w-auto w-full">
                 <select
                     value={category}
                     onChange={(e) =>
                         setCategory(e.target.value as TodoCategory)
                     }
-                    className="p-3 border rounded-lg min-w-[120px]"
+                    className="p-3 border rounded-lg flex-1 sm:flex-none sm:min-w-[120px]"
                 >
                     <option value="work">Work</option>
                     <option value="personal">Personal</option>
@@ -43,7 +43,7 @@ export const TodoForm = ({ onAdd }: TodoFormProps) => {
                 </select>
                 <button
                     type="submit"
-                    className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 whitespace-nowrap"
+                    className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 whitespace-nowrap flex-1 sm:flex-none"
                 >
                     Add Todo
                 </button>

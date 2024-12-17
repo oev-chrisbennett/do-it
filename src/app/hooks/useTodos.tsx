@@ -2,10 +2,19 @@ import { storage } from '@/app/lib/storage'
 import type { FilterOption, SortOption, Todo, TodoCategory } from '@/app/types'
 import { useEffect, useMemo, useState } from 'react'
 
+interface TodoSettings {
+    showControls: boolean
+    showCategories: boolean
+}
+
 export const useTodos = () => {
     const [todos, setTodos] = useState<Todo[]>([])
     const [sortBy, setSortBy] = useState<SortOption>('createdAt')
     const [filterBy, setFilterBy] = useState<FilterOption>('all')
+    const [settings, setSettings] = useState<TodoSettings>({
+        showControls: false,
+        showCategories: false,
+    })
 
     useEffect(() => {
         setTodos(storage.getTodos())
@@ -46,6 +55,17 @@ export const useTodos = () => {
         storage.setTodos(updatedTodos)
     }
 
+    const toggleControls = () => {
+        setSettings((prev) => ({ ...prev, showControls: !prev.showControls }))
+    }
+
+    const toggleCategories = () => {
+        setSettings((prev) => ({
+            ...prev,
+            showCategories: !prev.showCategories,
+        }))
+    }
+
     const filteredAndSortedTodos = useMemo(() => {
         let filtered = [...todos]
 
@@ -84,5 +104,8 @@ export const useTodos = () => {
         setSortBy,
         filterBy,
         setFilterBy,
+        settings,
+        toggleControls,
+        toggleCategories,
     }
 }

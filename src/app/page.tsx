@@ -16,6 +16,9 @@ export default function Home() {
         setSortBy,
         filterBy,
         setFilterBy,
+        settings,
+        toggleControls,
+        toggleCategories,
     } = useTodos()
 
     return (
@@ -31,6 +34,10 @@ export default function Home() {
                         filterBy={filterBy}
                         onSortChange={setSortBy}
                         onFilterChange={setFilterBy}
+                        showControls={settings.showControls}
+                        onToggleControls={toggleControls}
+                        showCategories={settings.showCategories}
+                        onToggleCategories={toggleCategories}
                     />
                     <div className="mt-8 space-y-3">
                         {todos.length === 0 ? (
@@ -45,6 +52,7 @@ export default function Home() {
                                     onToggle={toggleTodo}
                                     onDelete={deleteTodo}
                                     onUpdateCategory={updateCategory}
+                                    showCategory={settings.showCategories}
                                 />
                             ))
                         )}

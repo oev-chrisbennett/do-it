@@ -5,6 +5,7 @@ interface TodoItemProps {
     onToggle: (id: string) => void
     onDelete: (id: string) => void
     onUpdateCategory: (id: string, category: TodoCategory) => void
+    showCategory: boolean
 }
 
 export const TodoItem = ({
@@ -12,10 +13,11 @@ export const TodoItem = ({
     onToggle,
     onDelete,
     onUpdateCategory,
+    showCategory,
 }: TodoItemProps) => {
     return (
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 border rounded-lg bg-white">
-            <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="flex flex-wrap items-center gap-3 p-3 border rounded-lg bg-white">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
                 <input
                     type="checkbox"
                     checked={todo.completed}
@@ -23,12 +25,19 @@ export const TodoItem = ({
                     className="h-5 w-5 flex-shrink-0"
                 />
                 <span
-                    className={`flex-1 ${todo.completed ? 'line-through text-gray-500' : ''}`}
+                    className={`${todo.completed ? 'line-through text-gray-500' : ''}`}
                 >
                     {todo.text}
                 </span>
+                <button
+                    type="button"
+                    onClick={() => onDelete(todo.id)}
+                    className="ml-auto flex-shrink-0 px-3 py-1.5 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 text-sm"
+                >
+                    Delete
+                </button>
             </div>
-            <div className="flex items-center gap-2 w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
+            {showCategory && (
                 <select
                     value={todo.category}
                     onChange={(e) =>
@@ -37,21 +46,14 @@ export const TodoItem = ({
                             e.target.value as TodoCategory,
                         )
                     }
-                    className="px-3 py-1.5 border rounded-lg text-sm flex-1 sm:flex-none"
+                    className="flex-shrink-0 px-3 py-1.5 border rounded-lg text-sm w-full sm:w-auto"
                 >
                     <option value="work">Work</option>
                     <option value="personal">Personal</option>
                     <option value="shopping">Shopping</option>
                     <option value="other">Other</option>
                 </select>
-                <button
-                    type="button"
-                    onClick={() => onDelete(todo.id)}
-                    className="px-3 py-1.5 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 text-sm"
-                >
-                    Delete
-                </button>
-            </div>
+            )}
         </div>
     )
 }
