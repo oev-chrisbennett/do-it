@@ -14,29 +14,33 @@ export const Controls = ({
     onFilterChange,
 }: ControlsProps) => {
     return (
-        <div className="flex gap-4 my-4">
-            <div className="flex items-center gap-2">
-                <label htmlFor="sortSelect">Sort by:</label>
+        <div className="flex flex-col sm:flex-row gap-4 my-6">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 flex-1">
+                <label htmlFor="sortSelect" className="font-medium">
+                    Sort by:
+                </label>
                 <select
                     id="sortSelect"
                     value={sortBy}
                     onChange={(e) => onSortChange(e.target.value as SortOption)}
-                    className="p-2 border rounded-lg"
+                    className="p-2.5 border rounded-lg flex-1 sm:max-w-[200px]"
                 >
                     <option value="createdAt">Date Created</option>
                     <option value="alphabetical">Alphabetical</option>
                     <option value="category">Category</option>
                 </select>
             </div>
-            <div className="flex items-center gap-2">
-                <label htmlFor="filterSelect">Filter:</label>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 flex-1">
+                <label htmlFor="filterSelect" className="font-medium">
+                    Filter:
+                </label>
                 <select
                     id="filterSelect"
                     value={filterBy}
                     onChange={(e) =>
                         onFilterChange(e.target.value as FilterOption)
                     }
-                    className="p-2 border rounded-lg"
+                    className="p-2.5 border rounded-lg flex-1 sm:max-w-[200px]"
                 >
                     <option value="all">All</option>
                     <option value="active">Active</option>

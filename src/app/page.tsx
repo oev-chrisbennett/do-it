@@ -19,28 +19,36 @@ export default function Home() {
     } = useTodos()
 
     return (
-        <main className="min-h-screen p-8">
-            <div className="max-w-2xl mx-auto">
-                <h1 className="text-3xl font-bold mb-8 text-center">
-                    To-Do ✅
-                </h1>
-                <TodoForm onAdd={addTodo} />
-                <Controls
-                    sortBy={sortBy}
-                    filterBy={filterBy}
-                    onSortChange={setSortBy}
-                    onFilterChange={setFilterBy}
-                />
-                <div className="mt-8 space-y-3">
-                    {todos.map((todo) => (
-                        <TodoItem
-                            key={todo.id}
-                            todo={todo}
-                            onToggle={toggleTodo}
-                            onDelete={deleteTodo}
-                            onUpdateCategory={updateCategory}
-                        />
-                    ))}
+        <main className="min-h-screen bg-slate-200">
+            <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                <div className="bg-white rounded-xl shadow-sm p-6 sm:p-8">
+                    <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
+                        To-Do ✅
+                    </h1>
+                    <TodoForm onAdd={addTodo} />
+                    <Controls
+                        sortBy={sortBy}
+                        filterBy={filterBy}
+                        onSortChange={setSortBy}
+                        onFilterChange={setFilterBy}
+                    />
+                    <div className="mt-8 space-y-3">
+                        {todos.length === 0 ? (
+                            <p className="text-center text-gray-500 py-8">
+                                No todos yet. Add one above!
+                            </p>
+                        ) : (
+                            todos.map((todo) => (
+                                <TodoItem
+                                    key={todo.id}
+                                    todo={todo}
+                                    onToggle={toggleTodo}
+                                    onDelete={deleteTodo}
+                                    onUpdateCategory={updateCategory}
+                                />
+                            ))
+                        )}
+                    </div>
                 </div>
             </div>
         </main>
